@@ -361,7 +361,7 @@
 <context>
     <name>Providers</name>
     <message>
-        <location filename="../qml/components/Providers.qml" line="98"/>
+        <location filename="../qml/components/Providers.qml" line="101"/>
         <source>Time to First Fix</source>
         <translation type="unfinished"></translation>
     </message>
