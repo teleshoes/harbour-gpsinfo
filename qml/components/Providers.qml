@@ -75,6 +75,9 @@ Item {
             repeat: true;
             onTriggered: {
                 //console.log("tick")
+
+                logger.log(formatInfo())
+
                 timing.secondsSinceLastLocationFix = Math.round((new Date() - timing.lastPositionTimestamp)/1000)
                 if (timing.pendingFix) {
                     timing.secondsToLocationFix = Math.round(-(new Date() - timing.gpsActivationTime)/1000);
@@ -110,4 +113,35 @@ Item {
 
         }
     }
+
+
+    function formatInfo() {
+      var pos = providers.position.position
+      var com = providers.compass
+      var gps = providers.gps
+
+      var lat = pos.latitudeValid ? pos.coordinate.latitude.toFixed(8) : "???"
+      var lon = pos.longitudeValid ? pos.coordinate.longitude.toFixed(8) : "???"
+      var alt = pos.altitudeValid ? pos.coordinate.altitude.toFixed(8) : "???"
+      var speed = pos.speedValid ? pos.speed.toFixed(8) : "???"
+      var dirMove = !isNaN(gps.movementDirection) ? gps.movementDirection.toFixed(8) : "???"
+      var dirComp = com.reading === null ? "???" : com.reading.azimuth.toFixed(8)
+      var vAcc = pos.verticalAccuracyValid ? pos.verticalAccuracy.toFixed(8) : "???"
+      var hAcc = pos.horizontalAccuracyValid ? pos.horizontalAccuracy.toFixed(8) : "???"
+      var satUsed = gps.active ? gps.numberOfUsedSatellites : "???"
+      var satVis = gps.active ? gps.numberOfVisibleSatellites : "???"
+
+      return (""
+        + ""  + "lat=" + lat
+        + "," + "lon=" + lon
+        + "," + "alt=" + lon + "m"
+        + "," + "speed=" + speed + "m/s"
+        + "," + "dirMove=" + dirMove
+        + "," + "dirComp=" + dirComp
+        + "," + "vAcc=" + vAcc + "m"
+        + "," + "hAcc=" + hAcc + "m"
+        + "," + "sat=" + satUsed + "/" + satVis
+      )
+    }
+
 }
