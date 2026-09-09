@@ -48,6 +48,7 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172 256x256
 HEADERS += \
     src/gpsdatasource.h \
     src/qmlsettingswrapper.h \
+    src/logger.h \
     src/gpsinfosettings.h
 
 QT += positioning

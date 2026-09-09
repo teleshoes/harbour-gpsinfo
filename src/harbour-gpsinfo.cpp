@@ -1,9 +1,11 @@
 #include <QtQuick>
 
 #include <sailfishapp.h>
+#include <QDateTime>
 #include <QTranslator>
 #include "gpsdatasource.h"
 #include "gpsinfosettings.h"
+#include "logger.h"
 
 
 int main(int argc, char *argv[]) {
@@ -33,8 +35,19 @@ int main(int argc, char *argv[]) {
     translator->load(fileName, baseName);
     QGuiApplication::installTranslator(translator);
 
+    QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+    QDir(cacheDir).mkpath(".");
+    QString logFile = ""
+      + cacheDir
+      + "/harbour-gpsinfo-" + QString::number(QDateTime::currentMSecsSinceEpoch()) + ".log";
+    qDebug() << "logging to " << logFile;
+
+    Logger* logger = new Logger();
+    logger->init(logFile);
+
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("settings", settings);
+    view->rootContext()->setContextProperty("logger", logger);
     view->setSource(SailfishApp::pathTo("qml/harbour-gpsinfo.qml"));
     view->showFullScreen();
     return qGuiAppl->exec();
