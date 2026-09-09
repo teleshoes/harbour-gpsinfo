@@ -98,7 +98,7 @@ Item {
             if (pendingFix) {
                 secondsToLocationFix = Math.round((new Date() - gpsActivationTime)/1000)
                 pendingFix=false
-                Notices.show(qsTr("Time to First Fix") + ": " + secondsToFirstFix + "s", Notice.Long)
+                Notices.show(qsTr("Time to First Fix") + ": " + secondsToLocationFix + "s", Notice.Long)
             }
 
         }
