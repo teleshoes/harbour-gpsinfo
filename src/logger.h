@@ -21,19 +21,21 @@ public:
         stop();
     }
 
-    void init(const QString &fileName) {
-        logFile.setFileName(fileName);
-        logFilePath = fileName;
-        logFileSize = 0;
-        ready = true;
+    void setLogFilePath(const QString &filePath) {
+        logFilePath = filePath;
     }
 
-    void stop() {
+    Q_INVOKABLE void start() {
+        stop();
+        logFile.setFileName(logFilePath);
+        ready = true;
+        qDebug() << "logging to " << logFilePath;
+    }
+
+    Q_INVOKABLE void stop() {
         if (logFile.isOpen()) {
-            logFile.flush();
             logFile.close();
         }
-        logFilePath = "";
         logFileSize = 0;
         ready = false;
     }
@@ -63,9 +65,11 @@ public:
                 logFile.flush();
                 logFileSize = logFile.size();
             }
-        }
 
-        qDebug() << "log: " << msg;
+            qDebug() << "appending log: " << msg;
+        }else{
+            qDebug() << "not logging: " << msg;
+        }
     }
 };
 

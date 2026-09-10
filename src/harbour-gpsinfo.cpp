@@ -40,10 +40,12 @@ int main(int argc, char *argv[]) {
     QString logFile = ""
       + cacheDir
       + "/harbour-gpsinfo-" + QString::number(QDateTime::currentMSecsSinceEpoch()) + ".log";
-    qDebug() << "logging to " << logFile;
 
     Logger* logger = new Logger();
-    logger->init(logFile);
+    logger->setLogFilePath(logFile);
+    if (settings->getWriteToLogFile()) {
+        logger->start();
+    }
 
     QQuickView *view = SailfishApp::createView();
     view->rootContext()->setContextProperty("settings", settings);

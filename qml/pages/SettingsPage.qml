@@ -169,6 +169,26 @@ Page {
             }
 
             ComboBox {
+                label: qsTr("Write to log file")
+                menu: ContextMenu {
+                    MenuItem {
+                        text: qsTr("yes")
+                        onClicked: {
+                            settings.writeToLogFile = true;
+                            logger.start();
+                        }
+                    }
+                    MenuItem {
+                        text: qsTr("no")
+                        onClicked: {
+                            settings.writeToLogFile = false;
+                            logger.stop();
+                        }
+                    }
+                }
+                Component.onCompleted: currentIndex = settings.writeToLogFile ? 0 : 1
+            }
+            ComboBox {
                 label: qsTr("Rotate satellite view")
                 menu: ContextMenu {
                     MenuItem {

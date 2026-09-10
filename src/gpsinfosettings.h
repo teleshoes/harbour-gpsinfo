@@ -42,6 +42,7 @@ class GPSInfoSettings : public QMLSettingsWrapper
     Q_PROPERTY(bool rotate READ getRotate WRITE setRotate NOTIFY rotateChanged)
     Q_PROPERTY(bool showEmptyChannels READ getShowEmptyChannels WRITE setShowEmptyChannels NOTIFY showEmptyChannelsChanged)
     Q_PROPERTY(float magneticDeclination READ getMagneticDeclination WRITE setMagneticDeclination NOTIFY magneticDeclinationChanged)
+    Q_PROPERTY(bool writeToLogFile READ getWriteToLogFile WRITE setWriteToLogFile NOTIFY writeToLogFileChanged)
 public:
     explicit GPSInfoSettings(QObject *parent = 0);
 
@@ -80,6 +81,7 @@ public:
     bool getRotate() {return this->value("rotate", true).toBool();}
     bool getShowEmptyChannels() {return this->value("showEmptyChannels", true).toBool();}
     float getMagneticDeclination() {return this->value("magneticDeclination", 0).toFloat();}
+    bool getWriteToLogFile() {return this->value("writeToLogFile", false).toBool();}
 
     void setCoordinateFormat(QString val) {this->setValue("coordinateFormat", val); emit coordinateFormatChanged(val);}
     void setLocale(QString val) {this->setValue("locale", val); emit localeChanged(val);}
@@ -116,6 +118,7 @@ public:
     void setRotate(bool val) {this->setValue("rotate", val); emit rotateChanged(val);}
     void setShowEmptyChannels(bool val) {this->setValue("showEmptyChannels", val); emit showEmptyChannelsChanged(val);}
     void setMagneticDeclination(float val) {this->setValue("magneticDeclination", val); emit magneticDeclinationChanged(val);}
+    void setWriteToLogFile(bool val) {this->setValue("writeToLogFile", val); emit writeToLogFileChanged(val);}
 private:
 
 signals:
@@ -154,6 +157,7 @@ signals:
     void rotateChanged(bool);
     void showEmptyChannelsChanged(bool);
     void magneticDeclinationChanged(float);
+    void writeToLogFileChanged(bool);
 
 public slots:
 
