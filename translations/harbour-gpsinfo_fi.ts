@@ -491,5 +491,9 @@ Longitude = Pituusaste</translatorcomment>
         <source>Show movement direction</source>
         <translation>Näytä liikeen suuntanuoli</translation>
     </message>
+    <message>
+        <source>Write to log file</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

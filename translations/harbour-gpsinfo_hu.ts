@@ -486,5 +486,9 @@ kérjük ide fordulj</translation>
         <source>Show movement direction</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Write to log file</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
