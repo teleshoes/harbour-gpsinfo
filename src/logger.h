@@ -59,8 +59,8 @@ public:
                 QDateTime now = QDateTime::currentDateTime();
                 QTextStream(&logFile)
                   << "" << now.toMSecsSinceEpoch()
-                  << " : " << now.toString(Qt::ISODate)
-                  << " : " << msg
+                  << "," << now.toString(Qt::ISODate)
+                  << "," << msg
                   << "\n";
                 logFile.flush();
                 logFileSize = logFile.size();
